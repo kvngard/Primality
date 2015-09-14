@@ -38,14 +38,17 @@ namespace PrimalityTest
 
         public string testPrimality(int input, int kval)
         {
+            // Time Complexity: O(n^4)
+            // Space Complexity: O(n)
+
             // Normalizes the K val to prevent errors.
             if (kval >= input)
                 kval = input - 1;
 
-            // This loop will execute O(n) times (see note #2).
+            // This loop will execute O(n) times (see note #2) and O(n) space.
             foreach (int a in getRandomValue(input, kval))
             {
-                // Each call to the modular exponentiation function requires O(n^3) operations.
+                // Each call to the modular exponentiation function requires O(n^3) operations and O(n) space.
                 int mod = modularExponentiation(a, input - 1, input);
                 if (mod != 1)
                     return input + " is not a prime value.";
@@ -53,7 +56,7 @@ namespace PrimalityTest
 
             // Calculates the probability that the test result is accurate.
             double probability = calculateProbability(kval);
-            return "The input is prime with a probability of ≥" + probability.ToString() + "%";
+            return input.ToString() + " is prime with a probability of ≥" + probability.ToString() + "%";
         }
 
         private static double calculateProbability(int kval)
@@ -66,19 +69,43 @@ namespace PrimalityTest
 
         private IEnumerable<int> getRandomValue(int input, int kval)
         {
-            // Time Complexity:
+            // Time Complexity: O(n)
             // Space Complexity: O(n)
+            // As this is a generator function, it is not executed repeatedly and responds as if we were calling Next() on an interator each time the function is called.
 
             Random r = new Random();
-            HashSet<int> randomSet = new HashSet<int>();
-
-            while (randomSet.Count < kval)
+            
+            // Test to determine if K is approaching N. 
+            // As K approaches N, the number of draws needed get K random values goes up significantly.
+            // So if K is 90% of N, we pre-generate a list and draw from that, exchanging space for time.
+            if ((double)kval/(double)input < .90)
             {
-                int rand = r.Next(1, input);
-                if (!randomSet.Contains(rand))
+                HashSet<int> randomSet = new HashSet<int>();
+
+                // This portion makes average case O(n) calls and needs O(n) space. 
+                while (randomSet.Count < kval)
                 {
-                    yield return rand;
-                    randomSet.Add(rand);
+                    // Choose a random value.
+                    int rand = r.Next(1, input);
+                    if (!randomSet.Contains(rand))
+                    {
+                        yield return rand;
+                        randomSet.Add(rand);
+                    }
+                }
+            }
+            else
+            {
+                // This portion is designed to handle the worst-case situation where K is approaching N.
+                // Pre-generate a list of size O(n), which takes O(n) time.
+                List<int> randomList = new List<int>(Enumerable.Range(2, input - 2));
+                for (int i = 0; i < kval; i++)
+                {
+                    // Select and return k values. Space O(n) and time O(n).
+                    int randIndex = r.Next(0, randomList.Count);
+                    yield return randomList.ElementAt(randIndex);
+                    // Remove the used element from the list to avoid repetition.
+                    randomList.RemoveAt(randIndex);
                 }
             }
         }
@@ -87,6 +114,7 @@ namespace PrimalityTest
         {
             // Let n be the size in bits of x, y, and N (whichever is largest of the three).
             // Time Complexity: O(n^3)
+            // Space Complexity: O(n)
 
             // This represents the base-case and prevents us from multiplying by 0.
             if (y == 0)
