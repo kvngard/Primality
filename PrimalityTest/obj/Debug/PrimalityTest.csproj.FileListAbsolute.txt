@@ -1,0 +1,9 @@
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\bin\Debug\PrimalityTest.exe.config
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\bin\Debug\PrimalityTest.exe
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\bin\Debug\PrimalityTest.pdb
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\obj\Debug\PrimalityTest.csprojResolveAssemblyReference.cache
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\obj\Debug\PrimalityTest.Form1.resources
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\obj\Debug\PrimalityTest.Properties.Resources.resources
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\obj\Debug\PrimalityTest.csproj.GenerateResource.Cache
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\obj\Debug\PrimalityTest.exe
+c:\users\kgard91\documents\visual studio 2013\Projects\PrimalityTest\PrimalityTest\obj\Debug\PrimalityTest.pdb
