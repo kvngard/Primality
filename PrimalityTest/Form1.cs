@@ -71,7 +71,7 @@ namespace PrimalityTest
         {
             // Time Complexity: O(n)
             // Space Complexity: O(n)
-            // As this is a generator function, it is not executed repeatedly and responds as if we were calling Next() on an interator each time the function is called.
+            // As this is a generator function, the whole function doesn't execute each time it's call, and instead it responds as if we were calling Next() on an interator and execution starts at the yield return statement.
 
             Random r = new Random();
             
@@ -98,10 +98,11 @@ namespace PrimalityTest
             {
                 // This portion is designed to handle the worst-case situation where K is approaching N.
                 // Pre-generate a list of size O(n), which takes O(n) time.
-                List<int> randomList = new List<int>(Enumerable.Range(2, input - 2));
+                List<int> randomList = new List<int>(Enumerable.Range(1, input - 1));
+
+                // Select and return k values. Space O(n) and time O(n).
                 for (int i = 0; i < kval; i++)
                 {
-                    // Select and return k values. Space O(n) and time O(n).
                     int randIndex = r.Next(0, randomList.Count);
                     yield return randomList.ElementAt(randIndex);
                     // Remove the used element from the list to avoid repetition.
